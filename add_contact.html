@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Contact</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .card {
+      margin-top: 50px;
+    }
+  </style>
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">TEXT BLAST</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarColor02">
+        <ul class="navbar-nav me-auto">
+          <!-- Home Link -->
+          <li class="nav-item">
+            <a class="nav-link active" href="./index.html">Home</a>
+          </li>
+          <!-- Message Link -->
+          <li class="nav-item">
+            <a class="nav-link" href="Message.html">Message</a>
+          </li>
+          <!-- Contacts Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="contactsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Contacts
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="contactsDropdown">
+              <li><a class="dropdown-item" href="./add_contact.html">Add Contact</a></li>
+              <li><a class="dropdown-item" href="#">Departments</a></li>
+            </ul>
+          </li>
+          <!-- News Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="newsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              NEWS
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="newsDropdown">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Separated link</a></li>
+            </ul>
+          </li>
+          <!-- About Link -->
+          <li class="nav-item">
+            <a class="nav-link" href="./about.html">About</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</head>
+<body>
+
+<div class="container">
+  <div class="card">
+    <div class="card-header bg-primary text-white">
+      <h4>Add Contact</h4>
+    </div>
+    <div class="card-body">
+      <form id="addContactForm">
+        <!-- Full Name -->
+        <div class="mb-3">
+          <label for="fullName" class="form-label">Full Name:</label>
+          <input type="text" class="form-control" id="fullName" name="fullName" required placeholder="Enter full name">
+        </div>
+        <!-- Email -->
+        <div class="mb-3">
+          <label for="email" class="form-label">Email:</label>
+          <input type="email" class="form-control" id="email" name="email" required placeholder="Enter email address">
+        </div>
+        <!-- Phone Number -->
+        <div class="mb-3">
+          <label for="phone" class="form-label">Phone Number:</label>
+          <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter phone number">
+        </div>
+        <!-- Address -->
+        <div class="mb-3">
+          <label for="Address" class="form-label">Address:</label>
+          <input type="text" class="form-control" id="address" name="address" required placeholder="Enter address">
+        </div>
+        <!-- Department Dropdown -->
+        <div class="mb-3">
+          <label for="category" class="form-label">Department:</label>
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="categoryDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+              Select a Group
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="categoryDropdown">
+              <li><a class="dropdown-item" href="#" onclick="setCategory('Family')">ADMIN</a></li>
+              <li><a class="dropdown-item" href="#" onclick="setCategory('Friends')">MANAGERS</a></li>
+              <li><a class="dropdown-item" href="#" onclick="setCategory('Work')">SUPERVISORS</a></li>
+              <li><a class="dropdown-item" href="#" onclick="setCategory('Others')">LEADERS</a></li>
+              <li><a class="dropdown-item" href="#" onclick="setCategory('Others')">ACCOUNTING</a></li>
+              <li><a class="dropdown-item" href="#" onclick="setCategory('Others')">MIC</a></li>
+              <li><a class="dropdown-item" href="#" onclick="setCategory('Others')">ENGINEERING</a></li>
+              <li><a class="dropdown-item" href="#" onclick="setCategory('Others')">MAINTENANCE</a></li>
+              <li><a class="dropdown-item" href="#" onclick="setCategory('Others')">MECHPOLE OPERATORS</a></li>
+              <li><a class="dropdown-item" href="#" onclick="setCategory('Others')">EPOLE OPERATORS</a></li>
+              <li><a class="dropdown-item" href="#" onclick="setCategory('Others')">WAREHOUSE</a></li>
+
+            </ul>
+          </div>
+          <input type="hidden" id="category" name="category" required>
+        </div>
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary">Add Contact</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  function setCategory(category) {
+    document.getElementById('category').value = category; // Set the hidden input value
+    document.getElementById('categoryDropdown').innerText = category; // Update button text
+  }
+
+  // Handle form submission
+  document.getElementById("addContactForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent default submission
+
+    // Gather form data
+    const fullName = document.getElementById("fullName").value;
+    const email = document.getElementById("email").value;
+    const phone = document.getElementById("phone").value;
+    const category = document.getElementById("category").value;
+
+    // Display a success message (you can replace this with actual functionality)
+    alert(`Contact Added:\nName: ${fullName}\nEmail: ${email}\nPhone: ${phone}\nCategory: ${category}`);
+    
+    // Clear the form
+    this.reset();
+    document.getElementById('categoryDropdown').innerText = "Select a Category"; // Reset dropdown text
+  });
+</script>
+
+</body>
+</html>
